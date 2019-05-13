@@ -1,0 +1,31 @@
+nav
+      
+  a(href='/').dreambounty Dreambounty
+
+  if username
+    .dropdown
+      button
+        img(src='/images/menu.svg' width='24' height='24')
+      .menu
+        a(href=`/user/${username}` data-name='profile').item.masthead
+          img(src=`${user.avatar}` width='50' height='50')
+          p.name= user.name
+          p.username= username
+        a(href='/create' data-name='create').item
+          span.text Create
+          span.subtext Create a new request.
+        a(href='/settings' data-name='settings').item
+          span.text Settings
+          span.subtext Manage your account settings.
+        a(href='mailto:dreambountyapp@gmail.com' data-name='menu contact').item
+          span.text Support
+          span.subtext Contact our support team.
+        form(action='/logout' method='post' data-name='logout').item
+          input(type='hidden' name='csrf' value=csrf)
+          input(type='hidden' name='url' value=url)
+          span.text Sign out
+          span.subtext Sign out of your account.
+  else
+    form(action='/start' method='post' data-name='login')
+      input(type='hidden' name='url' value=url)
+      button(type='submit').button-light Sign in

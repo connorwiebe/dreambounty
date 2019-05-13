@@ -1,0 +1,158 @@
+@import '_defaults'
+
+/* general */
+
+.wrapper
+  align-items: flex-start
+  max-width: 1000px
+  padding-bottom: 125px
+
+.content
+  max-width: 600px
+  width: 100%
+
+.titles
+  border-bottom: 1px solid #333
+
+.titles-small
+  margin-bottom: 25px
+
+.subtitle-small
+  font-weight: 300
+  color: $secondary
+  line-height: 1.6
+
+.request-title
+  font-weight: 300
+  font-size: 1.9rem
+  margin-bottom: 35px
+
+input[type='submit'], button[type='submit']
+  margin-top: 50px
+
+/* stats */
+
+.stats
+  display: flex
+
+.stat
+  display: flex
+  flex-direction: column
+  margin-right: 30px
+
+.stat:last-of-type
+  margin-right: 0
+
+.stat-title
+  font-size: .65rem
+  font-weight: 500
+  margin-bottom: 7px
+  text-transform: uppercase
+
+.stat-num
+  font-size: 1.5rem
+  font-weight: 300
+  line-height: 1
+
+/* reauth */
+
+.reauth
+  margin-top: 50px
+
+.reauth .titles-small
+  margin-bottom: 0
+
+/* verified
+
+.verified
+  margin-top: 50px
+
+.verified a
+  font-weight: 400
+
+.verified input[type='submit']
+  margin-top: 30px
+
+/* authorized */
+
+.authorized
+  margin-top: 50px
+
+.authorized a
+  margin-top: 50px
+
+/* accept */
+
+.accept h2
+  margin-top: 50px
+  margin-bottom: 15px
+
+.accept .words
+  margin-top: 30px
+
+.accept .words a
+  font-weight: 500
+
+.accept .new-tabs
+  margin-top: 25px
+
+.accept .terms, .accept .privacy
+  display: flex
+  align-items: center
+  font-weight: 500
+  margin-bottom: 5px
+
+.accept .new-tab
+  font-size: 16px
+  padding-left: 5px
+
+.accept .checkbox
+  display: flex
+  align-items: center
+  margin-top: 25px
+  line-height: 1
+
+.accept input[type='checkbox']
+  margin-right: 5px
+  &:hover
+    cursor: pointer
+
+.accept form
+  margin-top: 40px
+
+.accept .update
+  min-height: 200px
+  font-size: .9rem
+
+.accept .update-submit
+  margin: 40px 0
+
+.accept .new-tabs
+  margin: 15px 0
+
+.accept .new-tab
+  font-size: 16px
+  padding-left: 5px
+
+/* final */
+
+.final
+  margin-top: 50px
+
+.final .final-note a
+  font-weight: 500
+
+.final .anchor-button
+  margin-top: 50px
+
+/* media queries */
+
+/* < 900px */
+@media screen and (max-width: 900px)
+  .request-title
+    font-size: 2.1rem
+
+/* < 600px */
+@media screen and (max-width: 600px)
+  .request-title
+    font-size: 2rem

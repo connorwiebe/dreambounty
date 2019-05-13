@@ -1,0 +1,114 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta_request
+    link(rel='stylesheet' href=`/request${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+
+    .wrapper
+      if canAccept
+        .accept
+          a(href=`/accept${url}`).button-light.anchor-button Accept Request
+      if isAccepted
+        .banner This request was accepted by #{request.name} on #{acceptedDate}!
+      .request
+        .stat-titles
+          .stat-title Recipient
+          if canDelete
+            button.delete.delete-request
+
+        .recipient
+          a(href=`/user/${request.username}`)
+            img(src=request.avatar).avatar
+          .names
+            .name-wrapper
+              a(href=`/user/${request.username}`)
+                if request.verified
+                  .name #{request.name} #[img.badge(src='/images/badge.svg')]
+                else
+                  .name #{request.name}
+
+            span.username= `${request.username}`
+        h1.title= request.title
+        time(datetime=request.requestCreated)= request.date
+
+
+      .stats
+
+        .default-stats
+          .stat.total
+            span.stat-title Raised
+            span(data-value=request.raised data-total=request.raised).stat-num= `$${request.raised || 0}`
+          .stat.backers-count
+            span.stat-title Backers
+            span.stat-num= request.backers || 0
+
+        if request.contribution || !isAccepted
+          .stat.contribute
+            span.stat-title Your Contribution
+            if !isAccepted
+              form(action='/contribute' method='post')
+                input(type='hidden' name='csrf' value=csrf)
+                input(type='text' maxlength='2' data-is-registered=isRegistered value=request.contribution).input.pay
+                span.symbol $
+            else
+              span.stat-num $#{request.contribution}
+
+
+      if updates.length || isAccepted && isRecipient
+        .updates-title Updates
+
+        if isAccepted && isRecipient
+          .create
+            textarea(type='text' rows='1' columns='200').create-text
+            .create-btn-wrapper
+              button.button-light.create-cancel Cancel
+              button.button-light.create-btn Create update
+
+        ol.updates
+          each update in updates
+            li.update(data-id=update.update_id)
+              .info
+                .attribution
+                  img(src=request.avatar).attribution-avatar
+                  span.attribution-username= request.username
+                  span.attribution-date= update.created
+                if isRecipient
+                  button.delete.delete-update
+              p.text= update.update
+
+
+      if backers.length || request.contribution
+        .backers-title Backers
+
+        ol.backers
+          li(class=(request.contribution ? 'show' : '')).owner.backer
+            a(href=`/user/${username}`)
+              img(src=avatar).backer-avatar
+            .backer-name
+              a(href=`/user/${username}`)= username
+              .time= request.contribution ? request.created : ''
+            .info
+              .contribution $#{request.contribution ? request.contribution : '0'}
+          
+          if request.contribution && backers.length
+            .bullet •
+
+          each backer in backers
+            li.backer
+              a(href=`/user/${backer.username}`)
+                img(src=backer.avatar).backer-avatar
+              div.backer-name
+                a(href=`/user/${backer.username}`)= backer.username
+                div.time= backer.created
+              div.info
+                div.contribution= `$${backer.contribution}`
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/request${min}.js`)

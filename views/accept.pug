@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description' content='Dreambounty is a platform for crowdfunding specific content that you’d like to see content creators produce.')
+    title Accept | Dreambounty
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons')
+    link(rel='stylesheet' href=`/accept${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+
+      .titles
+        h1.title Accept
+        p.subtitle= subtitles[request.current_step] ?  subtitles[request.current_step] : 'Success! The request has been accepted.'
+
+      h3.request-title= request.title
+
+      .stats
+        .stat.total
+          span.stat-title Total Raised
+          span.stat-num= `$${request.raised}`
+        .stat.backers
+          span.stat-title Backers
+          span.stat-num= request.backers
+
+      if request.current_step === 'reauth'
+        .reauth
+          .titles-small
+            h2.title-small Reauthentication
+            p.subtitle-small Before continuing please reauthenticate your Twitter account.
+          form(action=`${url}/reauth` method='post')
+            input(type='hidden' name='csrf' value=csrf)
+            button(type='submit').button-light Reauthenticate
+
+      else if request.current_step === 'verified'
+        .verified
+          .titles-small
+            h2.title-small We just sent an email to you.
+            p.subtitle-small Check the email address you used to sign up with Twitter.
+          form(action=`${url}/resend` method='post')
+            input(type='hidden' name='csrf' value=csrf)
+            input(type='submit' value='Resend Email').button-light
+
+      else if request.current_step === 'authorized'
+        .authorized
+          p.
+            Thank you for validating your information.
+            We are reviewing your application to accept the request.
+            We may require you to submit government-issued documents to verify your identity.
+            We will email you with further instructions within the next 48 hours.
+
+          a(href=`/${id}`).button-light.anchor-button Done
+
+      else if request.current_step === 'accepted'
+        .accept
+          h2 Approved
+          p.accept-note.
+            Your application has been approved and you can now accept the request.
+            Please write your first update informing your backers on how you plan to complete the request.
+            Your backers are your customers, please treat them that way and keep them up to date on your progress.
+            By accepting this request you are entering into a legal agreement with the backers of this request.
+            You must fulfill the spirit of the request to the fullest extent of your abilities.
+            Failure to satisfy the terms of the agreement with your backers could lead to legal action taken by them.
+          p.words.
+            Please read our #[a(href='/legal' target='_blank') Terms of Use] in its entirety,
+            especially sections #[a(href='/legal#how-requests-work' target='_blank') How Requests Work]
+            and #[a(href='/legal#how-funding-work' target='_blank') How Funding Work].
+
+          .new-tabs
+            a(href='/legal' target='_blank').terms
+              .terms-title Terms of Use
+              i.material-icons.new-tab open_in_new
+            a(href='/legal#privacy' target='_blank').privacy
+              .privacy-title Privacy Policy
+              i.material-icons.new-tab open_in_new
+
+          form(action=`${url}/accept` method='post')
+            input(type='hidden' name='csrf' value=csrf)
+            textarea(type='text' rows='1' columns='200' name='update' id='update').update
+            .checkbox
+              input(type='checkbox' id='checked' name='checked')
+              label(for='checked') Check here to indicate that you have read and agree to the Terms of Use and Privacy Policy
+            input(type='submit' value='Post update and accept request').button-light.update-submit
+
+      else
+        .final
+          p.final-note.
+            We've charged all your backers' credit cards.
+            Check your Stripe #[a(href='https://dashboard.stripe.com/dashboard' target='_blank') dashboard] to see a breakdown of all the payments.
+            You can #[a(href='/contact' target='_blank') contact us] if you have any questions.
+
+          a(href=`/${id}`).button-light.anchor-button Done
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/accept${min}.js`)

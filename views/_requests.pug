@@ -1,0 +1,22 @@
+each request in requests
+  .request.search-request
+    .container
+      a(href=`/${request.id}`)
+        img(src=request.avatar).avatar
+      a(href=`/${request.id}`).title
+        h2= request.title
+    .recipient
+      .name-wrapper
+        a(href=`/user/${request.username}`)
+          if request.verified
+            .name #{request.name} #[img.badge(src='/images/badge.svg')]
+          else
+            .name #{request.name}
+        span.username= `${request.username}`
+      .stats
+        span.bullet
+        .stat
+          span.stat-num= `$${request.raised}`
+        if request.accepted
+          .accepted
+            span Accepted

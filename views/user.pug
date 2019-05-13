@@ -1,0 +1,46 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta_user
+    link(rel='stylesheet' href=`/user${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+
+      .account
+        .user
+          if isOwner
+            a(href='/settings')
+              img.avatar(src=paramsUser.avatar)
+          else
+            img.avatar(src=paramsUser.avatar)
+
+          .name-wrapper
+            if paramsUser.verified
+              .name #{paramsUser.name} #[img.badge(src='/images/badge.svg')]
+            else
+              span.name= paramsUser.name
+          span.username= `${paramsUser.username}`
+
+        //- if isOwner
+        //-   .totals
+        //-     .stat
+        //-       .stat-title Total Contributions
+        //-       .stat-num $#{totalContributions || 0}
+
+      .summary
+        .tabs
+          button.tab recipient
+          button.tab backed
+          button.tab created
+
+        .requests
+          include _user_requests.pug
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/user${min}.js`)

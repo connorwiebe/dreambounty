@@ -1,0 +1,105 @@
+@import '_defaults'
+
+/* general */
+
+.wrapper .hide
+  display: none
+
+.wrapper .height
+  height: 50px
+
+.wrapper .show
+  opacity: 1
+
+.wrapper .show-clear
+  font-size: 12px
+  padding: 2px 10px 2px 2px
+
+.wrapper
+  align-items: flex-start
+  max-width: 1000px
+
+form
+  width: 100%
+
+.set
+  padding-top: 35px
+
+input[type='submit']
+  margin-top: 50px
+
+/* recipient */
+
+.recipient-wrapper
+  display: flex
+  flex-direction: column
+
+.search
+  position: relative
+  width: 100%
+  display: flex
+  z-index: 1
+
+.search input
+  font-weight: 400
+  &:focus ~ .magnifier i
+    color: #333
+
+.magnifier
+  position: absolute
+  display: flex
+  color: #d9dfe6
+  align-items: center
+  margin-left: 15px
+  right: 7.5px
+  height: 100%
+
+.magnifier i
+  color: #d9dfe6
+  font-size: 23px
+  padding: 2px 5px 2px 2px
+  transition: color .2s
+  &:hover
+    cursor: pointer
+
+.recipient
+  display: flex
+  align-items: center
+  opacity: 0
+  height: 0
+  transition: height .4s cubic-bezier(.82, 0, .12, 1)
+
+.avatar
+  width: 50px
+  height: 50px
+  object-fit: cover
+  border-radius: 100%
+
+.names
+  display: flex
+  flex-direction: column
+  margin-left: 15px
+
+.name-wrapper
+  display: flex
+
+.badge
+  margin-left: 4px
+  margin-top: 4px
+  width: 16px
+  height: 16px
+  object-fit: cover
+
+.name
+  font-size: 1.2rem
+  font-weight: 300
+
+.username
+  color: $secondary
+  font-size: .9rem
+  font-weight: 300
+
+/* request */
+
+.request
+  min-height: 100px

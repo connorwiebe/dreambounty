@@ -1,0 +1,329 @@
+$footer-height: 35px
+$nav-height: 100px
+$primary: #333
+$secondary: #7e899b
+$border-radius: 2px
+$font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif
+
+/* defaults */
+
+*
+  box-sizing: border-box
+
+body
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  padding: 0
+  margin: 0
+  display: flex
+  position: relative
+  flex-direction: column
+  align-items: center
+  width: 100%
+  color: $primary
+  font: 14px/1.2 $font-stack
+
+.wrapper
+  display: flex
+  align-items: flex-start
+  flex-direction: column
+  max-width: 1000px
+  width: 100%
+  min-height: calc(100vh - #{ $footer-height + $nav-height })
+  padding: 50px
+
+p
+  margin: 0
+
+a
+  text-decoration: none
+  color: inherit
+  outline: 0
+
+h1,h2,h3,h4
+  margin: 0
+  font-weight: 300
+
+ul,ol
+  padding: 0
+  margin: 0
+  list-style: none
+
+img,i
+  vertical-align: bottom
+
+::selection
+  background: #f6cff5
+
+.capsule .show, nav .show
+  display: block
+
+.capsule .hide, nav .hide
+  display: none
+
+/* logo */
+
+.dreambounty
+  // display: flex
+  // position: relative
+  // flex: 1 1 auto
+  // justify-content: center
+  font-weight: 500
+  text-transform: uppercase
+  font-size: 1rem
+
+/* message popup */
+
+.capsule
+  position: fixed
+  display: flex
+  z-index: 666
+  left: 30px
+  margin-right: 30px
+  bottom: 0
+  justify-content: center
+  align-items: center
+  min-width: 150px
+  max-width: 400px
+  min-height: 50px
+  // max-height: 50px
+  padding: 15px 25px
+  color: #fff
+  background: #333
+  border-radius: 2px
+  transform: translateY(100%)
+
+.msg
+  color: #fff
+  line-height: 1.3
+
+.capsule .clear
+  background: url(images/clear_light.svg) center no-repeat
+  background-size: 12px 12px
+  min-width: 12px
+  min-height: 12px
+  outline-width: 0
+  border: none
+  padding: 0
+  margin-left: 10px
+  &:hover
+    cursor: pointer
+
+=animate($name)
+  animation-name: $name
+  animation-duration: 400ms
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1)
+  animation-fill-mode: forwards
+
+.open
+  +animate(open)
+
+.close
+  +animate(close)
+
+@-webkit-keyframes open
+  0%
+    transform: translateY(110%)
+  100%
+    transform: translateY(-50%)
+
+@-webkit-keyframes close
+  0%
+    transform: translateY(-50%)
+  100%
+    transform: translateY(110%)
+
+/* input */
+
+.input,textarea
+  outline: 0
+  -webkit-appearance: none
+  -moz-appearance: none
+  width: 100%
+  padding: 15px 10px
+  font-weight: 300
+  border-radius: $border-radius
+  border: 1px solid #e6edf4
+  height: 40px
+  font-size: .95rem
+  transition: all .2s
+  font-family: $font-stack
+  &:focus
+    border-color: #007eff
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 0 3px rgba(0,126,255,.1)
+
+/* buttons */
+
+.button-light
+  outline-width: 0
+  font-weight: 400
+  font-size: .75rem
+  color: #7a808a
+  min-width: 100px
+  padding: 0 28px
+  height: 38px
+  border-radius: 2px
+  background: #fff
+  border: 1px solid #e6edf4
+  transition: all 150ms ease-out
+  font-family: $font-stack
+  &:hover
+    color: $primary
+    cursor: pointer
+
+.anchor-button
+  padding: 12px 28px 10px 28px
+  display: inline-block
+  text-align: center
+
+/* navigation */
+
+nav
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  padding: 0 50px
+  height: $nav-height
+
+// .dropdown-wrapper
+//   display: flex
+//   justify-content: flex-end
+//   width: 100px
+
+.dropdown
+  display: inline-flex
+  align-items: flex-end
+  position: relative
+  &:hover
+    cursor: pointer
+
+.dropdown button
+  background: none
+  border: none
+  outline: none
+  &:hover
+    cursor: pointer
+
+.dropdown img
+  border-radius: 40px
+
+.menu
+  position: absolute
+  display: none
+  top: 30px
+  right: 10px
+  width: 220px
+  border-radius: $border-radius
+  box-shadow: 0 3px 20px rgba(89, 105, 129, .3), 0 1px 2px rgba(0, 0, 0, .05), 0 0 0 1px rgba(89, 105, 129, .1)
+  z-index: 2
+
+.item
+  display: flex
+  flex-direction: column
+  justify-content: center
+  padding: 0 10px
+  min-height: 50px
+  border-bottom: 1px solid #e6edf4
+  background: #fff
+  &:hover
+    background: #f7f9fc
+
+form.item
+  border-bottom-left-radius: $border-radius
+  border-bottom-right-radius: $border-radius
+
+.masthead
+  border-top-left-radius: $border-radius
+  border-top-right-radius: $border-radius
+  align-items: center
+  padding: 40px 30px 30px 30px
+
+nav .name
+  margin-top: 15px
+  font-size: 1rem
+  font-weight: 500
+
+nav .username
+  text-align: center
+  margin-top: 3px
+  font-weight: 400
+  color: $secondary
+  font-size: .8rem
+
+.item .text
+  display: block
+  color: #333c46
+  text-transform: uppercase
+  font-size: .675rem
+  font-weight: 700
+  border: none
+  padding: 0
+
+.item .subtext
+  display: block
+  color: #95a0ae
+  font-size: .75rem
+
+/* titles */
+
+.titles
+  display: flex
+  flex-direction: column
+  width: 100%
+  margin-bottom: 35px
+  padding-bottom: 35px
+  border-bottom: 1px solid $primary
+
+.titles .title
+  font-size: 3rem
+  font-weight: 400
+  &:first-letter
+    text-transform: uppercase
+
+.subtitle
+  font-size: 1.05rem
+  font-weight: 300
+  line-height: 1.5
+
+.titles-small
+  margin-bottom: 20px
+
+.title-small
+  font-size: 1.1rem
+
+.subtitle-small
+  font-weight: 300
+  color: $secondary
+  line-height: 1.6
+
+/* footer */
+
+footer
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  width: 100%
+  height: $footer-height
+  bottom: 0
+  right: 0
+  color: #adb5bd
+  padding: 10px
+  font-size: .7rem
+
+footer a:hover
+  color: $primary
+
+/* media queries */
+
+/* < 600px */
+@media screen and (max-width: 600px)
+  .wrapper
+    padding: 0px 25px 50px 25px
+  .dropdown-wrapper
+    width: 25px
+
+/* < 380px */
+@media screen and (max-width: 380px)
+  nav
+    padding: 0 25px

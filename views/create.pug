@@ -1,0 +1,52 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons')
+    link(rel='stylesheet' href=`/create${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+
+      .titles
+        h1.title Create
+        p.subtitle Create requests for your favorite creators.
+
+      form(action='/create' method='post').create-form
+        input(type='hidden' name='csrf' value=csrf)
+
+        .recipient-wrapper
+          .recipient
+            a(href=`/users/${recipient.username}`)
+              img(src=recipient.avatar ? recipient.avatar : 'https://abs.twimg.com/sticky/default_profile_images/default_profile.png').avatar
+            a(href=`/users/${recipient.username}`)
+              .names
+                .name-wrapper
+                  span.name= recipient.name
+                  img.badge(src='/images/badge.svg' class=(!recipient.verified ? 'hide' : ''))
+                span.username= recipient.username
+
+        .set
+          .titles-small
+            h2.title-small Recipient
+            p.subtitle-small Search for your recipient's Twitter account.
+          .search
+            input(type='text' name='recipient').input
+            .magnifier
+              i.material-icons= recipient.username ? '' : 'search'
+
+        .set
+          .titles-small
+            h2.title-small Your Request
+            p.subtitle-small What's your request?
+          textarea(type='text' name='title' maxlength='300').input.request
+
+        input(type='submit' value='Create request').button-light
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/create${min}.js`)

@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta
+    link(rel='stylesheet' href=`/legal${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+      .content
+        .titles
+          h1.title Legal
+          p.subtitle Terms of use and privacy policy.
+        include _terms
+        include _privacy
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/legal${min}.js`)

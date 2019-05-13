@@ -1,0 +1,29 @@
+each request in requests
+  .request
+    .container
+      a(href=`/${request.id}`)
+        img(src=request.avatar).avatar.lazy
+      a(href=`/${request.id}`).title
+        h2= request.title
+    .recipient
+      .name-wrapper
+        a(href=`/user/${request.username}`)
+          if request.verified
+            .name #{request.name} #[img.badge(src='/images/badge.svg')]
+          else
+            .name #{request.name}
+        span.username= `${request.username}`
+      .stats
+        span.bullet
+        .details
+          if isOwner
+            .contribution-wrapper
+              span.request-contribution $#{request.contribution || 0}
+              .tooltip.contribution-tooltip Your Contribution
+            span &nbsp;/&nbsp;
+          .raised-wrapper
+            span.request-raised $#{request.raised || 0}
+            .tooltip.raised-tooltip Total Raised
+        if request.accepted
+          .accepted
+            span Accepted

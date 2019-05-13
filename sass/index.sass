@@ -1,0 +1,228 @@
+@import '_defaults'
+
+/* general */
+
+.filter .active
+  color: $primary
+
+.wrapper
+  padding: 50px 25px
+  max-width: 1000px
+
+.wrapper .show-clear
+  font-size: 12px
+  padding: 2px 10px 2px 2px
+
+/* search */
+
+.search
+  display: flex
+  justify-content: center
+  width: 100%
+  padding: 0 25px
+
+.search input
+  height: 36px
+
+.search-wrapper
+  position: relative
+  width: 100%
+  max-width: 600px
+  display: flex
+  z-index: 1
+
+.input
+  font-weight: 400
+  &:focus ~ .magnifier i
+    color: #333
+
+.magnifier
+  position: absolute
+  display: flex
+  align-items: center
+  margin-left: 15px
+  right: 7.5px
+  height: 100%
+
+.magnifier i
+  color: #d9dfe6
+  font-size: 23px
+  padding: 2px 5px 2px 2px
+  transition: color .2s
+  &:hover
+    cursor: pointer
+
+/* feed */
+
+.feed
+  width: 100%
+  margin-top: 60px
+
+.sort
+  display: flex
+  justify-content: flex-end
+  // padding: 0 30px
+  height: 50px
+
+.filter
+  display: flex
+
+.type
+  font-size: .675rem
+  text-transform: uppercase
+  font-weight: 500
+  color: $secondary
+  background: none
+  border: none
+  outline: none
+  &:hover
+    cursor: pointer
+
+/* requests */
+
+.requests
+  display: flex
+  flex-direction: column
+  justify-content: center
+  width: 100%
+
+.request
+  display: flex
+  flex-direction: column-reverse
+  align-items: center
+  padding: 20px 0
+  border-top: 1px solid #efeff0
+  border-radius: 2px
+
+.avatar
+  position: relative
+  width: 70px
+  height: 70px
+  object-fit: cover
+  border-radius: $border-radius
+  margin-top: 5px
+
+.title
+  margin-left: 15px
+  height: 100%
+
+.title h2
+  font-weight: 400
+  font-size: 1.15rem
+
+.container
+  display: flex
+  width: 100%
+
+/* stats */
+
+.stats
+  display: flex
+  align-items: center
+
+.bullet
+  margin-left: 18px
+
+.stat
+  display: flex
+  flex-direction: column
+
+.stat-title
+  text-transform: uppercase
+  font-weight: 500
+  font-size: .7rem
+
+.stat-num
+  display: flex
+  font-weight: 400
+  font-size: 1rem
+  line-height: 1.3
+
+/* accepted */
+
+.accepted
+  display: flex
+  justify-content: center
+  align-items: center
+  color: rgba(27, 183, 110, .8)
+  border-radius: 3px
+  text-transform: uppercase
+  font-weight: 500
+  font-size: .65rem
+  height: 18px
+  margin-left: 15px
+  min-width: 65px
+
+/* recipient */
+
+.recipient
+  display: flex
+  width: 100%
+  margin-bottom: 6px
+
+.name-wrapper
+  flex-direction: column
+  display: flex
+
+.name
+  font-size: .85rem
+
+.badge
+  margin-bottom: 1px
+  width: 14px
+  height: 14px
+  object-fit: cover
+
+.username
+  color: $secondary
+  font-size: .75rem
+
+/* media queries */
+
+/* < 600px */
+@media screen and (max-width: 600px)
+
+  nav, .search, .sort
+    background: #f7f7f7
+
+  .bullet
+    margin-left: 14.5px
+    margin-right: 12.5px
+    &:before
+      display: inline-block
+      content: '•'
+
+  .wrapper
+    padding: 0
+
+  .feed
+    margin-top: 0
+
+  .sort
+    padding: 0 25px
+
+  .type
+    font-weight: 600
+
+  .request
+    flex-direction: column-reverse
+    align-items: flex-start
+    width: 100%
+    padding: 20px 25px
+
+  .container
+    display: block
+
+  .recipient
+    margin-bottom: 10px
+
+  .title
+    margin-left: 0
+
+  .avatar
+    float: right
+    margin-top: 5px
+    margin-left: 10px
+
+  .accepted
+    margin-top: 2px

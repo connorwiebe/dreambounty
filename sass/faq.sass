@@ -1,0 +1,59 @@
+@import '_defaults'
+
+.backdrop
+  display: none
+  position: absolute
+  height: 100%
+  width: 100%
+  background: #5a6169
+  opacity: .3
+  z-index: 1
+
+body .modal
+  z-index: 3
+  box-shadow: rgba(90, 97, 105, .1) 0px 7.5px 35px 0px,
+  rgba(90, 97, 105, .1) 0px 15px 22.5px 0px,
+  rgba(90, 97, 105, .12) 0px 4px 8.5px 0px,
+  rgba(90, 97, 105, .1) 0px 2px 3px 0px
+
+.wrapper
+  align-items: flex-start
+  max-width: 1000px
+
+.titles
+  width: auto
+  margin-left: 25px
+  margin-right: 25px
+
+.pitch
+  padding: 25px 25px 40px 25px
+
+.faqs
+  position: relative
+
+.faq
+  z-index: 0
+  position: relative
+  background: #fff
+  padding: 25px
+  transition: box-shadow .5s linear, z-index .5s linear
+
+.faq h2
+  font-size: 1rem
+  font-weight: 400
+
+.faq p
+  margin-top: 5px
+  font-size: .9rem
+  font-weight: 400
+  color: $secondary
+
+.contact
+  padding: 60px 25px 0 25px
+
+/* media queries */
+
+/* < 600px */
+@media screen and (max-width: 600px)
+  .wrapper
+    padding: 15px 0 50px 0

@@ -1,0 +1,59 @@
+doctype html
+html(lang='en')
+
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    meta(name='description' content='Dreambounty is a platform for crowdfunding specific content that you’d like to see content creators produce.')
+    title Settings | Dreambounty
+    link(rel='stylesheet' href=`/settings${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+
+      .titles
+        h1.title Settings
+        p.subtitle Manage your profile and account settings.
+
+      .set.payment
+        .titles-small
+          h2.title-small Make contributions
+          p.subtitle-small Add a debit or credit card to start making contributions.
+
+        .card(data-email=customers.email)
+          img(src=`/images/${customers.card.brand}.svg`)
+          if customers.card.last4
+            p.last4= customers.card.last4
+            button.delete-card
+          button.button-light.add-card= `${customers.card.last4 ? 'Change' : 'Add'} Card`
+
+      .set.payout
+        .titles-small
+          h2.title-small Accept requests
+          p.subtitle-small.accept-subtitle Add a payout method so you can start accepting requests.
+
+        if hasStripeAccount
+          p.connected Your Stripe account is connected. Click #[b #[a(href=`https://dashboard.stripe.com/dashboard` target='_blank') here]] to go to your dashboard.
+          button.button-light.disconnect-stripe Disconnect Stripe Account
+
+        else
+          if hasRequests
+            a(href=`https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_CIOazGZPfFlIJHgQ5EyjGbrd1nlV9OgM&scope=read_write&state=${csrf}`)
+              button.button-light.add-bank Add Stripe Account
+          else
+            span.note You don't have any requests yet.
+
+      .set.delete
+        .titles-small
+          h2.title-small Delete account
+          p.subtitle-small.accept-subtitle This action cannot be undone.
+
+        button.button-light.delete-account Delete Account
+
+    include _msg
+    include _footer
+    include _noscript
+    script(src='https://checkout.stripe.com/checkout.js')
+    script(src='https://js.stripe.com/v3/')
+    script(src=`/settings${min}.js`)

@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta
+    link(rel='stylesheet' href=`/faq${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    .backdrop
+    include _nav
+    .wrapper
+      .content
+        .titles
+          h1.title FAQ
+          p.subtitle Frequently Asked Questions.
+
+        .pitch#pitch.
+          Dreambounty is a platform for crowdfunding specific content that you’d like to see content creators produce.
+          Currently requests for creators from fans have no real place to develop and gain traction.
+          Dreambounty makes it possible to support creators on a more gradular level, allowing you to fund only the content you really want to see.
+          Anyone can create a request and anyone can contribute to it.
+          An example request could be for your favourite YouTuber to make a video series on a topic you're interested in.
+          If enough people agree with you and contribute to your request it'll be worth it for the creator to accept the request and produce that content.
+
+        ul.faqs
+
+          li.faq
+            h2 When will my credit card be charged?
+            p Your credit card is only charged if a request that you have contributed to is accepted by the recipient.
+
+          li.faq
+            h2 What are Dreambounty's fees?
+            p We take 5% of the funds raised if a request is accepted.
+
+          li.faq
+            h2 Who can be the recipient of a request?
+            p Anyone with a Twitter account can be the recipient of requests.
+
+          li.faq
+            h2 What currencies are accepted?
+            p 135+ currencies are currently accepted. However all amounts are shown and charged in US Dollars. That means, for example, if you're from Canada and contribute $1, your credit card will be charged 1 USD worth of CAD. Check your currency's exchange rate before contributing.
+
+          li.faq
+            h2 How are recipients' identities verified?
+            p The recipient of a request must log in to their Twitter account using their Twitter credentials along with other measures before they can accept it.
+
+          li.faq
+            h2 Why can't I delete a request I created?
+            p If a request has more than 5 backers, it can't be deleted anymore.
+
+          li.faq
+            h2 Why can't I find a Twitter user when creating a request?
+            p If you can't find someone try copy and pasting their exact Twitter username into the search.
+
+        .contact.
+          If your question wasn't answered you can #[a(href='mailto:dreamrequestapp@gmail.com') #[b contact us]] for further support.
+
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/faq${min}.js`)

@@ -1,0 +1,53 @@
+doctype html
+html(lang='en')
+
+  head
+    include _meta
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons')
+    link(rel='stylesheet' href=`/index${min}.css`)
+
+  body(data-gaid=gaid data-uid=uid data-event=event)
+    include _nav
+    .wrapper
+
+      .search
+        .search-wrapper
+          input(type='text' name='search').input
+          .magnifier
+            i.material-icons search
+            
+      .feed
+        .sort
+          .filter
+            button.type New
+            button.type Top
+            
+        .requests
+          each request in requests
+            .request.init-request
+              .container
+                a(href=`/${request.id}`)
+                  img(src=request.avatar).avatar.lazy
+                a(href=`/${request.id}`).title
+                  h2= request.title
+              .recipient
+                .name-wrapper
+                  a(href=`/user/${request.username}`)
+                    if request.verified
+                      .name #{request.name} #[img.badge(src='/images/badge.svg')]
+                    else
+                      .name #{request.name}
+                  span.username= `${request.username}`
+                .stats
+                  span.bullet
+                  .stat
+                    span.stat-num= `$${request.raised}`
+                  if request.accepted
+                    .accepted
+                      span Accepted
+
+    include _msg
+    include _footer
+    include _noscript
+    script(async src='https://js.stripe.com/v3/')
+    script(src=`/index${min}.js`)
